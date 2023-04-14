@@ -24,3 +24,5 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 ### 프로젝트 구조
 
 `tree`명령어로 손쉽게 조회할 수는 있습니다. 이후 프로젝트가 고도화되어 직접 언급할 필요가 있을 때 추가하겠습니다.
+
+..
