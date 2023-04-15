@@ -5,6 +5,8 @@
 
 -   [level1_bookratingprediction-recsys-12](#level1_bookratingprediction-recsys-12)
     -   [settings](#settings)
+        -   [data](#data)
+        -   [deps](#deps)
     -   [etc](#etc)
         -   [프로젝트 구조](#프로젝트-구조)
 
@@ -12,12 +14,19 @@
 
 ## settings
 
+### data
+
 data의 크기 때문에 gitignore 처리해두었습니다. 다음 명령어를 통해서 data를 받아주세요.  
 혹시 명령어가 존재하지 않는 등의 trouble이 생기면 직접 설치하시거나, 수동으로 다운로드 받아서 넣어주시면 됩니다.
 
 ```bash
 wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/000237/data/data.tar.gz && tar -xf data.tar.gz && rm -rf ./data.tar.gz
 ```
+
+### deps
+
+`source ~/../conda/etc/profile.d/conda.sh`  
+`conda install --yes --file requirement.txt`
 
 ## etc
 
