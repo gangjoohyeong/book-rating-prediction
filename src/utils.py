@@ -23,7 +23,6 @@ def rmse(real: list, predict: list) -> float:
     pred = np.array(predict)
     return np.sqrt(np.mean((real-pred) ** 2))
 
-
 def models_load(args, data):
     '''
     [description]
@@ -51,7 +50,6 @@ def models_load(args, data):
     else:
         raise ValueError('MODEL is not exist : select model in [FM,FFM,NCF,WDN,DCN,CNN_FM,DeepCoNN]')
     return model
-
 
 class Setting:
     @staticmethod
