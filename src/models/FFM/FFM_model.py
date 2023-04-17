@@ -11,7 +11,6 @@ class FeaturesLinear(nn.Module):
         self.bias = torch.nn.Parameter(torch.zeros((output_dim,)))
         self.offsets = np.array((0, *np.cumsum(field_dims)[:-1]), dtype=np.int32)
 
-
     def forward(self, x: torch.Tensor):
         x = x + x.new_tensor(self.offsets).unsqueeze(0)
         return torch.sum(self.fc(x), dim=1) + self.bias
@@ -33,7 +32,7 @@ class FieldAwareFactorizationMachine(nn.Module):
 
 
     def forward(self, x: torch.Tensor):
-        x = x + x.new_tensor(self.offsets, dtype= np.int32).unsqueeze(0)
+        x = x + x.new_tensor(self.offsets, dtype= torch.int32).unsqueeze(0)
         xs = [self.embeddings[i](x) for i in range(self.num_fields)]
         ix = list()
         for i in range(self.num_fields - 1):

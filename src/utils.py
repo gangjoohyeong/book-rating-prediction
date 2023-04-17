@@ -38,6 +38,8 @@ def models_load(args, data):
         model = FactorizationMachineModel(args, data).to(args.device)
     elif args.model=='FFM':
         model = FieldAwareFactorizationMachineModel(args, data).to(args.device)
+    elif args.model=='DeepFFM':
+        model = DeepFFM(args, data).to(args.device)
     elif args.model=='NCF':
         model = NeuralCollaborativeFiltering(args, data).to(args.device)
     elif args.model=='WDN':
@@ -49,7 +51,7 @@ def models_load(args, data):
     elif args.model=='DeepCoNN':
         model = DeepCoNN(args, data).to(args.device)
     else:
-        raise ValueError('MODEL is not exist : select model in [FM,FFM,NCF,WDN,DCN,CNN_FM,DeepCoNN]')
+        raise ValueError('MODEL is not exist : select model in [FM,FFM,DeepFFM,NCF,WDN,DCN,CNN_FM,DeepCoNN]')
     return model
 
 
@@ -89,7 +91,6 @@ class Setting:
         path : log file을 저장할 경로를 반환합니다.
         이 때, 경로는 log/날짜_시간_모델명/ 입니다.
         '''
-        self.make_dir("/log")
         path = f'./log/{self.save_time}_{args.model}/'
         return path
 
@@ -105,8 +106,8 @@ class Setting:
         filename : submit file을 저장할 경로를 반환합니다.
         이 때, 파일명은 submit/날짜_시간_모델명.csv 입니다.
         '''
-        self.make_dir("./submit")
-        filename = f'./submit/{self.save_time}_{args.model}.csv'
+        path = self.make_dir("./submit/")
+        filename = f'{path}{self.save_time}_{args.model}.csv'
         return filename
 
     def make_dir(self,path):
