@@ -15,8 +15,11 @@ def main(args):
 
     ######################## DATA LOAD
     print(f'--------------- {args.model} Load Data ---------------')
-    if args.model in ('FM', 'FFM'):
-        data = context_data_load(args)
+    if args.model in ('FM', 'FFM', 'DeepFFM'):
+        if args.preprocessed == True :
+            data = context_data_load(args)
+        else :
+            data = base_context_data_load(args)
     elif args.model in ('NCF', 'WDN', 'DCN'):
         data = dl_data_load(args)
     elif args.model == 'CNN_FM':
@@ -31,7 +34,7 @@ def main(args):
 
     ######################## Train/Valid Split
     print(f'--------------- {args.model} Train/Valid Split ---------------')
-    if args.model in ('FM', 'FFM'):
+    if args.model in ('FM', 'FFM', 'DeepFFM'):
         data = context_data_split(args, data)
         data = context_data_loader(args, data)
 
@@ -60,12 +63,12 @@ def main(args):
 
 
     ######################## Model
-    print(f'--------------- INIT {args.model} ---------------')
+    print(f'--------------- INIT {args.model} ---------------')        
     model = models_load(args,data)
 
 
     ######################## TRAIN
-    print(f'--------------- {args.model} TRAINING ---------------')
+    print(f'--------------- {args.model} TRAINING ---------------')        
     model = train(args, model, data, logger, setting)
 
 
@@ -77,7 +80,7 @@ def main(args):
     ######################## SAVE PREDICT
     print(f'--------------- SAVE {args.model} PREDICT ---------------')
     submission = pd.read_csv(args.data_path + 'sample_submission.csv')
-    if args.model in ('FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'):
+    if args.model in ('FM', 'FFM', 'DeepFFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'):
         submission['rating'] = predicts
     else:
         pass
@@ -95,9 +98,9 @@ if __name__ == "__main__":
 
 
     ############### BASIC OPTION
-    arg('--data_path', type=str, default='data/', help='Data path를 설정할 수 있습니다.')
+    arg('--data_path', type=str, default='/opt/ml/data/', help='Data path를 설정할 수 있습니다.')
     arg('--saved_model_path', type=str, default='./saved_models', help='Saved Model path를 설정할 수 있습니다.')
-    arg('--model', type=str, choices=['FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'],
+    arg('--model', type=str, choices=['FM', 'FFM', 'DeepFFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'],
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
     arg('--data_shuffle', type=bool, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
     arg('--test_size', type=float, default=0.2, help='Train/Valid split 비율을 조정할 수 있습니다.')
@@ -118,14 +121,16 @@ if __name__ == "__main__":
     arg('--device', type=str, default='cuda', choices=['cuda', 'cpu'], help='학습에 사용할 Device를 조정할 수 있습니다.')
 
 
-    ############### FM, FFM, NCF, WDN, DCN Common OPTION
-    arg('--embed_dim', type=int, default=16, help='FM, FFM, NCF, WDN, DCN에서 embedding시킬 차원을 조정할 수 있습니다.')
-    arg('--dropout', type=float, default=0.2, help='NCF, WDN, DCN에서 Dropout rate를 조정할 수 있습니다.')
-    arg('--mlp_dims', type=list, default=(16, 16), help='NCF, WDN, DCN에서 MLP Network의 차원을 조정할 수 있습니다.')
-
+    ############### FM, FFM, DeepFFM, NCF, WDN, DCN Common OPTION
+    arg('--embed_dim', type=int, default=16, help='FM, FFM, DeepFFM, NCF, WDN, DCN에서 embedding시킬 차원을 조정할 수 있습니다.')
+    arg('--dropout', type=float, default=0.2, help='DeepFFM, NCF, WDN, DCN에서 Dropout rate를 조정할 수 있습니다.')
+    arg('--mlp_dims', nargs='+', type=int, default=(16, 16), help='DeepFFM, NCF, WDN, DCN에서 MLP Network의 차원을 조정할 수 있습니다.')
+    
+    ############### FM, FFM, DeepFFM
+    arg('--preprocessed', type=bool, default=True, help='FM, FFM, DeepFFM에서 전처리된 데이터를 사용하는지 여부를 조정합니다. default=True')
 
     ############### DCN
-    arg('--num_layers', type=int, default=3, help='에서 Cross Network의 레이어 수를 조정할 수 있습니다.')
+    arg('--num_layers', type=int, default=3, help='DCN에서 Cross Network의 레이어 수를 조정할 수 있습니다.')
 
 
     ############### CNN_FM
@@ -134,7 +139,7 @@ if __name__ == "__main__":
 
 
     ############### DeepCoNN
-    arg('--vector_create', type=bool, default=False, help='DEEP_CONN에서 text vector 생성 여부를 조정할 수 있으며 최초 학습에만 True로 설정하여야합니다.')
+    arg('--vector_create', type=bool, default=True, help='DEEP_CONN에서 text vector 생성 여부를 조정할 수 있으며 최초 학습에만 True로 설정하여야합니다.')
     arg('--deepconn_embed_dim', type=int, default=32, help='DEEP_CONN에서 user와 item에 대한 embedding시킬 차원을 조정할 수 있습니다.')
     arg('--deepconn_latent_dim', type=int, default=10, help='DEEP_CONN에서 user/item/image에 대한 latent 차원을 조정할 수 있습니다.')
     arg('--conv_1d_out_dim', type=int, default=50, help='DEEP_CONN에서 1D conv의 출력 크기를 조정할 수 있습니다.')

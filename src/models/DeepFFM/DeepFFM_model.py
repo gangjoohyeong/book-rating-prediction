@@ -113,11 +113,10 @@ class DeepFFM(nn.Module):
                             mlp_dims=args.mlp_dims, 
                             dropout_rate=args.dropout)
         
-        # self.encoding_dims = np.concatenate([[0], np.cumsum(self.field_dims)[:-1]])
         self.encoding_dims = np.array((0, *np.cumsum(self.field_dims)[:-1]), dtype=np.int32)
         # print(f"encoding_dims : {self.encoding_dims}")
         
-        # 각 feature를 필드 개수만큼의 embed_dim 차원의 벡터로 임베딩
+        # embedding layer
         self.embedding = nn.ModuleList([
             nn.Embedding(feature_size, args.embed_dim) for feature_size in self.field_dims
         ])
