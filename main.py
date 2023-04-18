@@ -45,7 +45,10 @@ def define_argparser():
     parser.add_argument('--mlp_dims', nargs='+', type=int, default=(16, 16), help='DeepFFM, NCF, WDN, DCN에서 MLP Network의 차원을 조정할 수 있습니다.')
     
     ############### FM, FFM, DeepFFM
-    parser.add_argument('--preprocessed', type=bool_type_casting, default=False, help='FM, FFM, DeepFFM에서 전처리된 데이터를 사용하는지 여부를 조정합니다. default=0')
+    parser.add_argument('--preprocessed', type=bool_type_casting, default=False, help='FM, FFM, DeepFFM에서 전처리된 데이터를 사용하는지 여부를 조정합니다. default=False')
+    
+    ############### DeepFFM
+    parser.add_argument('--use_bn', type=bool_type_casting, default=True, help='DeepFFM에서 Batch Normalization 사용하는지 여부를 조정합니다. default=True')
     
     ############### DCN
     parser.add_argument('--num_layers', type=int, default=3, help='DCN에서 Cross Network의 레이어 수를 조정할 수 있습니다.')
