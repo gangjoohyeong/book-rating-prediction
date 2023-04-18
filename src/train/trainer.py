@@ -16,7 +16,7 @@ class RMSELoss(nn.Module):
         return loss
 
 
-def train(args, model, dataloader, logger, setting):
+def train(args, model, dataloader, logger, setting, wandb):
     minimum_loss = 999999999
     if args.loss_fn == 'MSE':
         loss_fn = MSELoss()
@@ -52,6 +52,9 @@ def train(args, model, dataloader, logger, setting):
             batch +=1
         valid_loss = valid(args, model, dataloader, loss_fn)
         print(f'Epoch: {epoch+1}, Train_loss: {total_loss/batch:.3f}, valid_loss: {valid_loss:.3f}')
+        
+        wandb.log({'epoch': epoch+1, 'train_loss': total_loss/batch, 'valid_loss': valid_loss})
+        
         logger.log(epoch=epoch+1, train_loss=total_loss/batch, valid_loss=valid_loss)
         if minimum_loss > valid_loss:
             minimum_loss = valid_loss
