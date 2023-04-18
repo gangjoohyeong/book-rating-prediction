@@ -20,7 +20,7 @@ def define_argparser():
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
     parser.add_argument('--data_shuffle', type=bool_type_casting, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
     parser.add_argument('--test_size', type=float, default=0.2, help='Train/Valid split 비율을 조정할 수 있습니다.')
-    parser.add_argument('--stratify', type=int, default=0, help='rating에 따라 stratified split할지 여부를 조정합니다. default=0')
+    parser.add_argument('--stratify', type=bool_type_casting, default=False, help='rating에 따라 stratified split할지 여부를 조정합니다. default=0')
     parser.add_argument('--seed', type=int, default=42, help='seed 값을 조정할 수 있습니다.')
     parser.add_argument('--use_best_model', type=bool_type_casting, default=True, help='검증 성능이 가장 좋은 모델 사용여부를 설정할 수 있습니다.')
 
@@ -44,7 +44,7 @@ def define_argparser():
     parser.add_argument('--mlp_dims', nargs='+', type=int, default=(16, 16), help='DeepFFM, NCF, WDN, DCN에서 MLP Network의 차원을 조정할 수 있습니다.')
     
     ############### FM, FFM, DeepFFM
-    parser.add_argument('--preprocessed', type=int, default=0, help='FM, FFM, DeepFFM에서 전처리된 데이터를 사용하는지 여부를 조정합니다. default=0')
+    parser.add_argument('--preprocessed', type=bool_type_casting, default=False, help='FM, FFM, DeepFFM에서 전처리된 데이터를 사용하는지 여부를 조정합니다. default=0')
     
     ############### DCN
     parser.add_argument('--num_layers', type=int, default=3, help='DCN에서 Cross Network의 레이어 수를 조정할 수 있습니다.')
