@@ -121,7 +121,7 @@ def main(args):
     logger.save_args()
 
     ######################## WanDB traker
-    wandb.init(project="level1_bookprediction", name=f"{args.model} + {Setting.save_time}", config=args)
+    wandb.init(project="level1_bookprediction", name=f"{args.model} + {setting.save_time}", config=args)
 
     ######################## Model
     print(f'--------------- INIT {args.model} ---------------')
