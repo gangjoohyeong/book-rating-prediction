@@ -130,7 +130,7 @@ def main(args):
 
     ######################## TRAIN
     print(f'--------------- {args.model} TRAINING ---------------')
-    model = train(args, model, data, logger, setting, wandb)
+    model = train(args, model, data, logger, setting)
 
 
     ######################## INFERENCE

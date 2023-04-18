@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from torch.nn import MSELoss
 from torch.optim import SGD, Adam
-import numpy as np
+import wandb
 
 
 class RMSELoss(nn.Module):
@@ -17,7 +17,7 @@ class RMSELoss(nn.Module):
         return loss
 
 
-def train(args, model, dataloader, logger, setting, wandb):
+def train(args, model, dataloader, logger, setting):
     minimum_loss = 999999999
     if args.loss_fn == 'MSE':
         loss_fn = MSELoss()
