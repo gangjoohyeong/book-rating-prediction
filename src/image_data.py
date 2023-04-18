@@ -75,7 +75,7 @@ def process_img_data(df, books, user2idx, isbn2idx, train=False):
         df_['isbn'] = df_['isbn'].map(isbn2idx)
 
     df_ = pd.merge(df_, books_[['isbn', 'img_path']], on='isbn', how='left')
-    df_['img_path'] = df_['img_path'].apply(lambda x: '../data/'+x)
+    df_['img_path'] = df_['img_path'].apply(lambda x: '/opt/ml/data/'+x)
     img_vector_df = df_[['img_path']].drop_duplicates().reset_index(drop=True).copy()
     data_box = []
     for idx, path in tqdm(enumerate(sorted(img_vector_df['img_path']))):
@@ -157,7 +157,17 @@ def image_data_split(args, data):
         image_data_load로 부터 전처리가 끝난 데이터가 담긴 사전 형식의 데이터를 입력합니다.
     ----------
     """
-    X_train, X_valid, y_train, y_valid = train_test_split(
+    if args.stratify==True :
+        X_train, X_valid, y_train, y_valid = train_test_split(
+                                                        data['img_train'][['user_id', 'isbn', 'img_vector']],
+                                                        data['img_train']['rating'],
+                                                        test_size=args.test_size,
+                                                        random_state=args.seed,
+                                                        shuffle=True,
+                                                        startify=data['img_train']['rating']
+                                                        )
+    else :    
+        X_train, X_valid, y_train, y_valid = train_test_split(
                                                         data['img_train'][['user_id', 'isbn', 'img_vector']],
                                                         data['img_train']['rating'],
                                                         test_size=args.test_size,
