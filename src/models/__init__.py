@@ -1,5 +1,6 @@
 from .FM.FM_model import FactorizationMachineModel
 from .FFM.FFM_model import FieldAwareFactorizationMachineModel
+from .DeepFFM.DeepFFM_model import DeepFFM
 from .NCF.NCF_model import NeuralCollaborativeFiltering
 from .WDN.WDN_model import WideAndDeepModel
 from .DCN.DCN_model import DeepCrossNetworkModel

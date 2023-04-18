@@ -11,7 +11,6 @@ class FeaturesLinear(nn.Module):
         self.bias = torch.nn.Parameter(torch.zeros((output_dim,)))
         self.offsets = np.array((0, *np.cumsum(field_dims)[:-1]), dtype=np.int32)
 
-
     def forward(self, x: torch.Tensor):
         x = x + x.new_tensor(self.offsets).unsqueeze(0)
         return torch.sum(self.fc(x), dim=1) + self.bias

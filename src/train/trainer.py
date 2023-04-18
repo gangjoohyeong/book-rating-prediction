@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from torch.nn import MSELoss
 from torch.optim import SGD, Adam
+import numpy as np
 
 
 class RMSELoss(nn.Module):
