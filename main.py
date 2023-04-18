@@ -6,6 +6,7 @@ from src.data import dl_data_load, dl_data_split, dl_data_loader
 from src.data import image_data_load, image_data_split, image_data_loader
 from src.data import text_data_load, text_data_split, text_data_loader
 from src.train import train, test
+import wandb
 
 def bool_type_casting(x): return str(x).lower() in ("true", "1", "yes")
 
@@ -124,9 +125,11 @@ def main(args):
     print(f'--------------- INIT {args.model} ---------------')
     model = models_load(args, data)
 
+    ######################## WanDB traker
+    wandb.init(project="level1_bookprediction", name=args.model, config=args)
 
     ######################## TRAIN
-    print(f'--------------- {args.model} TRAINING ---------------')        
+    print(f'--------------- {args.model} TRAINING ---------------')
     model = train(args, model, data, logger, setting)
 
 
@@ -152,4 +155,6 @@ def main(args):
 
 if __name__ == "__main__":
     args = define_argparser()
+    wandb.login(key="ca04f84994e2fb89f94b375201c282a478539251")
     main(args)
+    
