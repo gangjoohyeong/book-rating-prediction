@@ -121,7 +121,7 @@ def main(args):
     logger.save_args()
 
     ######################## WanDB traker
-    wandb.init(project="level1_bookprediction", name=f"{args.model} + {setting.save_time}", config=args)
+    wandb.init(project="level1_bookprediction_team", name=f"{args.model} + {setting.save_time}", config=args)
 
     ######################## Model
     print(f'--------------- INIT {args.model} ---------------')
@@ -158,4 +158,3 @@ if __name__ == "__main__":
     args = define_argparser()
     wandb.login(key="ca04f84994e2fb89f94b375201c282a478539251")
     main(args)
-    
