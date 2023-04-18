@@ -6,7 +6,7 @@ class FFMLayer(nn.Module):
     def __init__(self, input_dim):
         '''
         Parameter
-            input_dim: Entire dimension of input vector (sparse)
+            input_dim : Entire dimension of input vector (sparse)
         '''
         super().__init__()
         self.input_dim = input_dim
@@ -25,10 +25,10 @@ class FFMLayer(nn.Module):
     def forward(self, sparse_x, dense_x):
         '''
         Parameter
-            sparse_x : Same with `x_multihot` in FieldAwareFM class
-                       Float tensor with size "(batch_size, self.input_dim)"
-            dense_x  : Similar with `xv` in FFMLayer class. 
-                       Float tensors of size "(batch_size, num_fields, factor_dim)"
+            Input data of size "(batch_size, num_fields)" is converted to sparse_x and dense_x in DeepFFM.
+            sparse_x : Float tensor with size "(batch_size, input_dim)"
+            dense_x  : Float tensors of size "(batch_size, num_fields, factor_dim)"
+                       
         
         Return
             y: Float tensor of size "(batch_size)"
@@ -44,20 +44,24 @@ class FFMLayer(nn.Module):
 class DNNLayer(nn.Module):
     '''The Multi Layer Percetron (MLP); Fully-Connected Layer (FC); Deep Neural Network (DNN) with 1-dimensional output
     Parameter
-        inputs_dim: Input feature dimension
-        mlp_dims: List of positive integer, the layer number and units in each layer
-        dropout_rate: Float value in [0,1). Fraction of the units to dropout
+        input_dim : Input feature dimension (= num_fields * embed_dim)
+        mlp_dims : List of positive integer, the layer number and units in each layer
+        dropout_rate : Float value in [0,1). Fraction of the units to dropout
+        use_bn : Boolean value to indicate usage of batch normalization.
     '''
-    def __init__(self, input_dim, mlp_dims, dropout_rate):
+    def __init__(self, input_dim, mlp_dims, dropout_rate, use_bn):
         super().__init__()
         self.input_dim = input_dim
         self.mlp_dims = [input_dim] + list(mlp_dims)
         self.dropout = nn.Dropout(dropout_rate)
+        self.use_bn = use_bn
         self.num_layers = len(mlp_dims)
         # mlp layers
         self.linears = nn.Sequential()
         for i in range(self.num_layers) :
             self.linears.add_module(f'linear_{i+1}', nn.Linear(self.mlp_dims[i], self.mlp_dims[i+1], bias=True))
+            if self.use_bn :
+                self.linears.add_module(f'batchnorm_{i+1}', nn.BatchNorm1d(self.mlp_dims[i+1]))
             self.linears.add_module(f'activation_{i+1}', nn.ReLU(inplace=True))
             self.linears.add_module(f'dropout_{i+1}', self.dropout)
         # 마지막 출력층
@@ -77,11 +81,11 @@ class DNNLayer(nn.Module):
     def forward(self, x):
         '''
         Parameter
-            x: nD tensor of size "(batch_size, ..., input_dim)"
+            x : nD tensor of size "(batch_size, ..., input_dim)"
                The most common situation would be a 2D input with shape "(batch_size, input_dim)".
         
         Return
-            y_dnn: nD tensor of size "(batch_size, ..., 1)"
+            y_dnn : nD tensor of size "(batch_size, ..., 1)"
                For instance, if input x is 2D tensor, the output y would have shape "(batch_size, 1)".
         '''
         x = self.linears(x)
@@ -93,10 +97,11 @@ class DNNLayer(nn.Module):
 class DeepFFM(nn.Module):
     '''The DeepFM architecture
     Parameter
-        data['field_dims'] : List of field dimensions
+        field_dims : List of field dimensions
         args.embed_dim : Factorization dimension for dense embedding
-        arsg.mlp_dims : List of positive integer, the layer number and units in each layer
-        arsg.dropout : Float value in [0,1). Fraction of the units to dropout in DNN layer
+        args.mlp_dims : List of positive integer, the layer number and units in each layer
+        args.dropout : Float value in [0,1). Fraction of the units to dropout in DNN layer
+        args.use_bn : Boolean value to indicate usage of batch normalization in DNN layer.
     '''
     def __init__(self, args, data):
         super().__init__()
@@ -111,12 +116,14 @@ class DeepFFM(nn.Module):
         # DNNLayer
         self.dnn = DNNLayer(input_dim=(self.num_fields*args.embed_dim), 
                             mlp_dims=args.mlp_dims, 
-                            dropout_rate=args.dropout)
+                            dropout_rate=args.dropout,
+                            use_bn=args.use_bn)
         
+        # self.encoding_dims = np.concatenate([[0], np.cumsum(self.field_dims)[:-1]])
         self.encoding_dims = np.array((0, *np.cumsum(self.field_dims)[:-1]), dtype=np.int32)
         # print(f"encoding_dims : {self.encoding_dims}")
         
-        # embedding layer
+        # 각 feature를 필드 개수만큼의 embed_dim 차원의 벡터로 임베딩
         self.embedding = nn.ModuleList([
             nn.Embedding(feature_size, args.embed_dim) for feature_size in self.field_dims
         ])
@@ -132,12 +139,11 @@ class DeepFFM(nn.Module):
     def forward(self, x):
         '''
         Parameter
-            x: Long tensor of size "(batch_size, num_fields)"
-                sparse_x : Same with `x_multihot` in FieldAwareFM class
-                dense_x  : Similar with `xv` in FFMLayer class. 
-                           List of "num_fields" float tensors of size "(batch_size, factor_dim)"
+            x : Long tensor of size "(batch_size, num_fields)" is coverted to sparse_x and dense_x.
+                sparse_x : Float tensor with size "(batch_size, input_dim)"
+                dense_x  : List of "num_fields" float tensors of size "(batch_size, embed_dim)"
         Return
-            y: Float tensor of size "(batch_size)"
+            y : Float tensor of size "(batch_size)"
         '''
         # sparse_x : FFMLayer의 linear 부분의 input
         sparse_x = x + x.new_tensor(self.encoding_dims).unsqueeze(0)
