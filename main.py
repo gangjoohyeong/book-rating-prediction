@@ -14,7 +14,7 @@ def define_argparser():
     parser = argparse.ArgumentParser(description='parser')
     
     ############### BASIC OPTION
-    parser.add_argument('--data_path', type=str, default='/opt/ml/data/', help='Data path를 설정할 수 있습니다.')
+    parser.add_argument('--data_path', type=str, default='../data/', help='Data path를 설정할 수 있습니다.')
     parser.add_argument('--saved_model_path', type=str, default='./saved_models', help='Saved Model path를 설정할 수 있습니다.')
     parser.add_argument('--model', type=str, choices=['FM', 'FFM', 'DeepFFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'],
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
