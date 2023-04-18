@@ -138,9 +138,9 @@ def main(args):
     ######################## SAVE PREDICT
     print(f'--------------- SAVE {args.model} PREDICT ---------------')
     if args.preprocessed == True :
-        submission = pd.read_csv(args.data_path + 'sample_submission.csv')
+        submission = pd.read_csv(args.data_path + 'preprocessed/sample_submission.csv')
     elif args.preprocessed == False :
-        submission = pd.read_csv(args.data_path + 'raw_data/sample_submission.csv')
+        submission = pd.read_csv(args.data_path + 'sample_submission.csv')
     if args.model in ('FM', 'FFM', 'DeepFFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'):
         submission['rating'] = predicts
     else:
