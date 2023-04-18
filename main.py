@@ -7,7 +7,7 @@ from src.data import image_data_load, image_data_split, image_data_loader
 from src.data import text_data_load, text_data_split, text_data_loader
 from src.train import train, test
 
-def bool_type_lambda(x): return str(x).lower() in ("true", "1", "yes")
+def bool_type_casting(x): return str(x).lower() in ("true", "1", "yes")
 
 def define_argparser():
     ######################## BASIC ENVIRONMENT SETUP
@@ -18,11 +18,11 @@ def define_argparser():
     parser.add_argument('--saved_model_path', type=str, default='./saved_models', help='Saved Model path를 설정할 수 있습니다.')
     parser.add_argument('--model', type=str, choices=['FM', 'FFM', 'DeepFFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'],
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
-    parser.add_argument('--data_shuffle', type=bool_type_lambda, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
+    parser.add_argument('--data_shuffle', type=bool_type_casting, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
     parser.add_argument('--test_size', type=float, default=0.2, help='Train/Valid split 비율을 조정할 수 있습니다.')
     parser.add_argument('--stratify', type=int, default=0, help='rating에 따라 stratified split할지 여부를 조정합니다. default=0')
     parser.add_argument('--seed', type=int, default=42, help='seed 값을 조정할 수 있습니다.')
-    parser.add_argument('--use_best_model', type=bool_type_lambda, default=True, help='검증 성능이 가장 좋은 모델 사용여부를 설정할 수 있습니다.')
+    parser.add_argument('--use_best_model', type=bool_type_casting, default=True, help='검증 성능이 가장 좋은 모델 사용여부를 설정할 수 있습니다.')
 
 
     ############### TRAINING OPTION
@@ -56,7 +56,7 @@ def define_argparser():
 
 
     ############### DeepCoNN
-    parser.add_argument('--vector_create', type=bool_type_lambda, default=False, help='DEEP_CONN에서 text vector 생성 여부를 조정할 수 있으며 최초 학습에만 True로 설정하여야합니다.')
+    parser.add_argument('--vector_create', type=bool_type_casting, default=False, help='DEEP_CONN에서 text vector 생성 여부를 조정할 수 있으며 최초 학습에만 True로 설정하여야합니다.')
     parser.add_argument('--deepconn_embed_dim', type=int, default=32, help='DEEP_CONN에서 user와 item에 대한 embedding시킬 차원을 조정할 수 있습니다.')
     parser.add_argument('--deepconn_latent_dim', type=int, default=10, help='DEEP_CONN에서 user/item/image에 대한 latent 차원을 조정할 수 있습니다.')
     parser.add_argument('--conv_1d_out_dim', type=int, default=50, help='DEEP_CONN에서 1D conv의 출력 크기를 조정할 수 있습니다.')
