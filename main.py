@@ -120,13 +120,14 @@ def main(args):
     logger = Logger(args, log_path)
     logger.save_args()
 
+    ######################## WanDB traker
+    wandb.init(project="level1_bookprediction", name=f"{args.model} + {setting.save_time}", config=args)
 
     ######################## Model
     print(f'--------------- INIT {args.model} ---------------')
     model = models_load(args, data)
 
-    ######################## WanDB traker
-    wandb.init(project="level1_bookprediction", name=args.model, config=args)
+    wandb.watch(model)
 
     ######################## TRAIN
     print(f'--------------- {args.model} TRAINING ---------------')
