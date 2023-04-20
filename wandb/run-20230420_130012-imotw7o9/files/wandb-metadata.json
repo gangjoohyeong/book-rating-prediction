@@ -1,0 +1,37 @@
+{
+    "os": "macOS-12.5-arm64-arm-64bit",
+    "python": "3.10.8",
+    "heartbeatAt": "2023-04-20T04:00:12.739622",
+    "startedAt": "2023-04-20T04:00:12.012075",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--model",
+        "CAT"
+    ],
+    "state": "running",
+    "program": "/Users/darrenkwon/level1_bookratingprediction-recsys-12/main.py",
+    "codePath": "main.py",
+    "git": {
+        "remote": "https://github.com/boostcampaitech5/level1_bookratingprediction-recsys-12",
+        "commit": "640e5245c3f2df0860d72d9453925089c9e500f8"
+    },
+    "email": "darrenkwondev46@gmail.com",
+    "root": "/Users/darrenkwon/level1_bookratingprediction-recsys-12",
+    "host": "Darrenui-MacBookPro-2.local",
+    "username": "darrenkwon",
+    "executable": "/Users/darrenkwon/miniconda3/envs/camp/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 10,
+    "disk": {
+        "total": 460.4317207336426,
+        "used": 200.1559295654297
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}
