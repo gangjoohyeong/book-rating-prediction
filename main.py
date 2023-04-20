@@ -15,6 +15,7 @@ from src.train import train, test
 import wandb
 import os
 import numpy as np
+import json
 
 
 def bool_type_casting(x):
@@ -340,17 +341,10 @@ def init_cat_boost(args):
     print("========CAT param load and injection =========")
     from catboost import CatBoostRegressor
 
-    cat_params = {
-        "iterations": 1383,
-        "od_wait": 40,
-        "learning_rate": 0.048874458688324886,
-        "reg_lambda": 3.491598561612883,
-        "subsample": 0.8356954568350058,
-        "random_strength": 39.72019974335227,
-        "depth": 8,
-        "min_data_in_leaf": 1,
-        "leaf_estimation_iterations": 14,
-    }
+    with open("./catboost_param.json") as f:
+        cat_params = json.load(f)
+
+    print("print params", cat_params)
 
     cbr = CatBoostRegressor(
         **cat_params,
@@ -375,9 +369,10 @@ def init_cat_boost(args):
     wandb.init(
         project="level1_bookprediction_team",
         name=f"CAT + {setting.save_time}",
+        group="CAT",
         config=cat_params,
     )
-    wandb.log(group="CAT", RMSE=RMSE)
+    wandb.log({"cat RMSE": RMSE})
 
     print("========CAT submission created... =========")
     submit = pd.DataFrame(

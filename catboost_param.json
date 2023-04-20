@@ -1,0 +1,11 @@
+{
+    "iterations": 1383,
+    "od_wait": 40,
+    "learning_rate": 0.048874458688324886,
+    "reg_lambda": 3.491598561612883,
+    "subsample": 0.8356954568350058,
+    "random_strength": 39.72019974335227,
+    "depth": 8,
+    "min_data_in_leaf": 1,
+    "leaf_estimation_iterations": 14
+}
