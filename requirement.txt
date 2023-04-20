@@ -4,3 +4,4 @@ nltk
 transformers
 wandb
 python-dotenv
+catboost
