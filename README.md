@@ -115,10 +115,10 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 
 ### 최종 제출 모델 및 결과
 
-Weighted Ensemble (0.6, 0.3, 0.1): CatBoostRegressor + LGBMRegressor + DeepFFM  
-
-Public 8위, RMSE 2.1228  
-Private 8위, RMSE 2.1177
+**Weighted Ensemble (0.6, 0.3, 0.1): CatBoostRegressor + LGBMRegressor + DeepFFM  
+**
+**Public 8위, RMSE 2.1228  
+Private 8위, RMSE 2.1177**
 
 <br>
 
