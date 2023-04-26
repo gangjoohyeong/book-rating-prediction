@@ -1,23 +1,22 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeAuto&height=300&section=header&text=Book%20Rating%20Prediction&fontSize=60)
-- [Book Rating Prediction](#book-rating-prediction)
-  * [Settings](#settings)
-    + [Data](#data)
-    + [Dependency](#dependency)
-    + [Project Structure](#project-structure)
-  * [프로젝트 팀 구성 및 역할](#--------------)
-  * [프로젝트 개요](#-------)
-    + [프로젝트 배경 및 목표](#------------)
-    + [제공된 데이터](#-------)
-    + [평가방법](#----)
-    + [프로젝트 환경](#-------)
-  * [프로젝트 수행 절차 및 방법](#---------------)
-    + [프로젝트 진행 기간](#----------)
-    + [타임 라인](#-----)
-  * [프로젝트 수행 결과](#----------)
-    + [최종 제출 모델 및 결과](#-------------)
-    + [EDA & Preprocessing](#eda---preprocessing)
-    + [후보 모델 선정](#--------)
-
+- [Settings](#settings)
+  * [Data](#data)
+  * [Dependency](#dependency)
+  * [Train & Inference](#train---inference)
+  * [Project Structure](#project-structure)
+- [프로젝트 팀 구성 및 역할](#--------------)
+- [프로젝트 개요](#-------)
+  * [프로젝트 배경 및 목표](#------------)
+  * [제공된 데이터](#-------)
+  * [평가방법](#----)
+  * [프로젝트 환경](#-------)
+- [프로젝트 수행 절차 및 방법](#---------------)
+  * [프로젝트 진행 기간](#----------)
+  * [타임 라인](#-----)
+- [프로젝트 수행 결과](#----------)
+  * [최종 제출 모델 및 결과](#-------------)
+  * [EDA & Preprocessing](#eda---preprocessing)
+  * [후보 모델 선정](#--------)
 ## Settings
 
 ### Data
@@ -30,6 +29,12 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 
 `source ~/../conda/etc/profile.d/conda.sh`  
 `conda install --yes --file requirement.txt`
+
+### Train & Inference
+
+```bash
+python main.py --help
+```
 
 ### Project Structure
 ...
