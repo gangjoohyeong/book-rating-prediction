@@ -86,7 +86,6 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 <br>
 
 ## 프로젝트 수행 절차 및 방법
-<br>
 
 ### 프로젝트 진행 기간
 
@@ -104,7 +103,6 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 <br>
 
 ## 프로젝트 수행 결과
-<br>
 
 ### 최종 제출 모델 및 결과
 
