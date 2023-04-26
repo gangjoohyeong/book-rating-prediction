@@ -12,7 +12,7 @@ from src.data import dl_data_load, dl_data_split, dl_data_loader
 from src.data import image_data_load, image_data_split, image_data_loader
 from src.data import text_data_load, text_data_split, text_data_loader
 from src.train import train, test
-import wandb
+# import wandb
 import os
 import numpy as np
 import json
@@ -273,17 +273,17 @@ def main(args):
     logger.save_args()
 
     ######################## WanDB traker
-    wandb.init(
-        project="level1_bookprediction_team",
-        name=f"{args.model} + {setting.save_time}",
-        config=args,
-    )
+    # wandb.init(
+    #     project="project_name",
+    #     name=f"{args.model} + {setting.save_time}",
+    #     config=args,
+    # )
 
     ######################## Model
     print(f"--------------- INIT {args.model} ---------------")
     model = models_load(args, data)
 
-    wandb.watch(model)
+    # wandb.watch(model)
 
     ######################## TRAIN
     print(f"--------------- {args.model} TRAINING ---------------")
@@ -365,14 +365,14 @@ def init_cat_boost(args):
 
     RMSE = mean_squared_error(y_val, cbr.predict(X_val), squared=False)
 
-    print("========wandb log =========")
-    wandb.init(
-        project="level1_bookprediction_team",
-        name=f"CAT + {setting.save_time}",
-        group="CAT",
-        config=cat_params,
-    )
-    wandb.log({"cat RMSE": RMSE})
+    # print("========wandb log =========")
+    # wandb.init(
+    #     project="level1_bookprediction_team",
+    #     name=f"CAT + {setting.save_time}",
+    #     group="CAT",
+    #     config=cat_params,
+    # )
+    # wandb.log({"cat RMSE": RMSE})
 
     print("========CAT submission created... =========")
     submit = pd.DataFrame(
@@ -394,7 +394,8 @@ def init_cat_boost(args):
 
 if __name__ == "__main__":
     args = define_argparser()
-    wandb.login(key="ca04f84994e2fb89f94b375201c282a478539251")
+    # wandb_key=""
+    # wandb.login(key=wandb_key)
     if args.model == "CAT":
         init_cat_boost(args)
     else:

@@ -4,7 +4,7 @@ import os
 
 
 def load_cat_boost_data(args):
-    root_path = os.path.join(os.getcwd(), "./data")
+    root_path = os.path.join(os.getcwd(), "../data")
 
     raw_users = pd.read_csv(f"{root_path}/users.csv")
     raw_books = pd.read_csv(f"{root_path}/books.csv")
