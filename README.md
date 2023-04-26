@@ -25,14 +25,11 @@
 ```bash
 wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/000237/data/data.tar.gz && tar -xf data.tar.gz && rm -rf ./data.tar.gz
 ```
-<br>
 
 ### Dependency
 
 `source ~/../conda/etc/profile.d/conda.sh`  
 `conda install --yes --file requirement.txt`
-
-<br>
 
 ### Project Structure
 ...
@@ -41,7 +38,6 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 <br><br>
 
 ## 프로젝트 팀 구성 및 역할
-<br>
 
 |팀 공통|[권수훈](https://github.com/DarrenKwonDev)|[강주형](https://github.com/gangjoohyeong)|[심준협]()|[이민호](https://github.com/RonaldFisher9999)|
 |:------:|:------:|:------:|:------:|:------:|
@@ -51,8 +47,6 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 <br>
 
 ## 프로젝트 개요
-
-<br>
 
 ### 프로젝트 배경 및 목표
 
