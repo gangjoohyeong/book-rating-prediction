@@ -19,8 +19,6 @@
     + [EDA & Preprocessing](#eda---preprocessing)
     + [후보 모델 선정](#--------)
 
----
-
 ## Settings
 <br>
 
