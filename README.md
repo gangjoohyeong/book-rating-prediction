@@ -37,7 +37,30 @@ python main.py --help
 ```
 
 ### Project Structure
-...
+
+Baseline 코드를 기반을 Refactoring 진행
+
+├── [1] main.py  
+├── [2] src  
+│   ├── data  
+│   │   ├── base_context_data.py  
+│   │   ├── cat_boost_data.py  
+│   │   ├── dl_data.py  
+│   │   ├── image_data.py  
+│   │   └── text_data.py  
+│   ├── models   
+│   │   ├── CNN_FM  
+│   │   ├── DCN  
+│   │   ├── DeepCoNN  
+│   │   ├── FFM  
+│   │   ├── FM  
+│   │   ├── NCF  
+│   │   └── WDN  
+│   ├── train  
+│   │   └── trainer.py  
+│   └── utils.py  
+└── [3] ensemble.py  
+
 
 
 <br><br>
