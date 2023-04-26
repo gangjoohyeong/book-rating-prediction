@@ -1,3 +1,5 @@
+![header](https://capsule-render.vercel.app/api?type=waving&color=timeAuto&height=300&section=header&text=Book%20Rating%20Prediction&fontSize=60)
+
 # Book Rating Prediction
 
 - [Book Rating Prediction](#book-rating-prediction)
