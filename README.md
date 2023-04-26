@@ -1,22 +1,22 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeAuto&height=300&section=header&text=Book%20Rating%20Prediction&fontSize=60)
-- [Book Rating Prediction](#book-rating-prediction)
-  * [Settings](#settings)
-    + [Data](#data)
-    + [Dependency](#dependency)
-    + [Project Structure](#project-structure)
-  * [프로젝트 팀 구성 및 역할](#--------------)
-  * [프로젝트 개요](#-------)
-    + [프로젝트 배경 및 목표](#------------)
-    + [제공된 데이터](#-------)
-    + [평가방법](#----)
-    + [프로젝트 환경](#-------)
-  * [프로젝트 수행 절차 및 방법](#---------------)
-    + [프로젝트 진행 기간](#----------)
-    + [타임 라인](#-----)
-  * [프로젝트 수행 결과](#----------)
-    + [최종 제출 모델 및 결과](#-------------)
-    + [EDA & Preprocessing](#eda---preprocessing)
-    + [후보 모델 선정](#--------)
+- [Settings](#settings)
+  - [Data](#data)
+  - [Dependency](#dependency)
+  - [Project Structure](#project-structure)
+- [프로젝트 팀 구성 및 역할](#프로젝트-팀-구성-및-역할)
+- [프로젝트 개요](#프로젝트-개요)
+  - [프로젝트 배경 및 목표](#프로젝트-배경-및-목표)
+  - [제공된 데이터](#제공된-데이터)
+  - [평가방법](#평가방법)
+  - [프로젝트 환경](#프로젝트-환경)
+- [프로젝트 수행 절차 및 방법](#프로젝트-수행-절차-및-방법)
+  - [프로젝트 진행 기간](#프로젝트-진행-기간)
+  - [타임 라인](#타임-라인)
+- [프로젝트 수행 결과](#프로젝트-수행-결과)
+  - [최종 제출 모델 및 결과](#최종-제출-모델-및-결과)
+  - [EDA \& Preprocessing](#eda--preprocessing)
+  - [후보 모델 선정](#후보-모델-선정)
+- [Baseline에서 변경된 부분](#baseline에서-변경된-부분)
 
 ## Settings
 
@@ -154,3 +154,17 @@ Notebook 파일 참고.
     - 그 외에 validation loss를 줄이기 위해 다양한 parameter를 임의로 실험해보았으나 validation loss의 경향 자체는 바뀌지 않았기에 최저의 validation loss를 찾는데 집중하고자 함
     
     - model 자체의 레이어[convlution, pooling, activation(RELU)]가 2 layer밖에 존재하지 않아 좀 더 깊은 모델을 구성해보았으나, 이 또한 validation loss를 줄이는데 크게 기여하지는 않은 것을 확인
+
+
+## Baseline에서 변경된 부분
+- `main.py`
+  - 가독성 위해 전반적으로 수정
+  - arguments 추가
+  - DeepFFM, CatBoost 관련 코드 추가
+- `src/models/DeepFFM/`
+  - DeepFFM 모델 추가
+- `src/data/context_data.py`
+  - 전처리된 데이터(`preprocessed=True`) 사용하는 경우의 코드 추가
+  - 원본 코드는 `base_context_data.py`에 보존
+- wandb 관련
+  - `main.py`, `trainer.py`에서 wandb 관련 코드 주석 처리해놓음
