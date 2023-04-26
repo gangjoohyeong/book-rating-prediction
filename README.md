@@ -1,7 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeAuto&height=300&section=header&text=Book%20Rating%20Prediction&fontSize=60)
 
-# Book Rating Prediction
-
 - [Book Rating Prediction](#book-rating-prediction)
   * [Settings](#settings)
     + [Data](#data)
@@ -120,10 +118,7 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 
 Weighted Ensemble (0.6, 0.3, 0.1): CatBoostRegressor + LGBMRegressor + DeepFFM
 
-<br>
-
 Public 8위, RMSE 2.1228
-
 Private 8위, RMSE 2.1177
 
 <br>
