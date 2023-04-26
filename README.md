@@ -45,11 +45,9 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 ## 프로젝트 팀 구성 및 역할
 <br>
 
----
 |팀 공통|[권수훈](https://github.com/DarrenKwonDev)|[강주형](https://github.com/gangjoohyeong)|[심준협]()|[이민호](https://github.com/RonaldFisher9999)|
 |:------:|:------:|:------:|:------:|:------:|
 |EDA, Preprocessing, Wrap Up Report 작성|CNN_FM 모델 설계 및 실험, WandB 연결, 프로젝트 파이프라인 구성|GBM 계열 모델 설계 및 실험, Ensemble 전략 구성|GBM 계열 모델 설계 및 실험, Cross Validation|DeepFFM 모델 설계 및 실험, Stacking, Ensemble 전략 구성|
----
 
 <br>
 <br>
