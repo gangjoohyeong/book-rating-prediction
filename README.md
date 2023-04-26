@@ -34,4 +34,4 @@ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/00023
 
 `tree`명령어로 손쉽게 조회할 수는 있습니다. 이후 프로젝트가 고도화되어 직접 언급할 필요가 있을 때 추가하겠습니다.
 
-..
+wandb token은 환경 변수나 별도의 secret으로 관리해야 맞겠으나 여기서는 직접 하드 코딩해서 넣었습니다. 토큰은 이미 만료되어 큰 위험은 없을 것입니다.
