@@ -1,7 +1,5 @@
 # Book Rating Prediction
 
----
-
 - [Book Rating Prediction](#book-rating-prediction)
   * [Settings](#settings)
     + [Data](#data)
@@ -21,8 +19,7 @@
     + [EDA & Preprocessing](#eda---preprocessing)
     + [후보 모델 선정](#--------)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
+---
 
 ## Settings
 <br>
