@@ -17,6 +17,8 @@
   * [최종 제출 모델 및 결과](#-------------)
   * [EDA & Preprocessing](#eda---preprocessing)
   * [후보 모델 선정](#--------)
+- [Baseline에서 변경된 부분](#baseline---------)
+
 ## Settings
 
 ### Data
