@@ -38,7 +38,7 @@ python main.py --help
 
 ### Project Structure
 
-Baseline 코드를 기반을 Refactoring 진행
+Baseline 코드를 기반으로 Refactoring 진행
 
 ├── [1] main.py  
 ├── [2] src  
