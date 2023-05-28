@@ -15,7 +15,7 @@
   * [타임 라인](#타임-라인)
 - [프로젝트 수행 결과](#프로젝트-수행-결과)
   * [최종 제출 모델 및 결과](#최종-제출-모델-및-결과)
-  * [EDA & Preprocessing](#eda---preprocessing)
+  * [EDA & Preprocessing](#eda-&-preprocessing)
   * [후보 모델 선정](#후보-모델-선정)
 - [Baseline에서 변경된 부분](#baseline에서-변경된-부분)
 
